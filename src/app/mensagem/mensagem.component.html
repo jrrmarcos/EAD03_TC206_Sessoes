@@ -1,0 +1,22 @@
+<h1>Mensagem Secreta</h1>
+<h3>Porque os segredos, devem ser só seus!</h3>
+
+<h2>Seja bem vindo!</h2>
+
+<button (click)="deslogar()">Deslogar</button>
+
+<h3>Digite uma mensagem para cadastrar</h3>
+<form [formGroup]="formMensagem">
+    <textarea placeholder="Digite o texto desejado" rows="6" cols="50" formControlName="mensagem"></textarea>
+    <button (click)="addMensagem()">Cadastrar</button>
+</form>
+
+<div>
+    <h3>Mensagens previamente cadastradas</h3>
+    <ul>
+        <li *ngFor="let mensagem of mensagens">
+            {{mensagem.text}}
+            {{mensagem.date}}
+        </li>
+    </ul>
+</div>

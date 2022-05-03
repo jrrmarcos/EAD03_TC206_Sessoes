@@ -1,0 +1,35 @@
+<h1>Mensagem Secreta</h1>
+<h3>Porque os segredos, devem ser só seus!</h3>
+
+<div class="field" *ngIf="showRegistro" >
+    <h2>Você ainda não está logado! <br> Efetue o login abaixo:</h2>
+
+    <form [formGroup]="loginForm">
+        <label class="label">Login</label>
+        <input class="input" placeholder="exemplo@email.com" type="text" formControlName="login">
+
+        <label>Senha</label>
+        <input placeholder="Insira sua senha" type="password" formControlName="senha">
+    </form>
+
+    <button class="button" (click)="login()">Login</button>
+    <button (click)="openRegistro()">Cadastre-se</button>
+</div>
+
+<div *ngIf="!showRegistro">
+    <h2>Cadastre-se</h2>
+
+    <form [formGroup]="registroForm">
+        <label>Nome</label>
+        <input placeholder="José da Silva" type="text" formControlName="name">
+
+        <label>Login</label>
+        <input placeholder="exemplo@email.com" type="text" formControlName="login">
+
+        <label>Senha</label>
+        <input placeholder="Insira sua senha" type="password" formControlName="senha">
+    </form>
+
+    <button (click)="registro()">Cadastre-se</button>
+    <button (click)="closeRegistro()">Cancelar</button>
+</div>
