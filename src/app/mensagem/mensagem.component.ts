@@ -45,6 +45,9 @@ export class MensagemComponent implements OnInit {
         if (res.stauts === "OK") {
           toast({message: 'Mensagem cadastrada!', type: 'is-success'})
           this.router.navigate(['/messages']);
+        } else if ((res.status === "Erro") && (res.msg == "Bearer incorreto")){
+          toast({message: 'Autenticação expirada! Identifique-se novamente', type: 'is-danger'})
+          this.router.navigate(['/login'])
         } else {
           toast({message: 'Não foi possível cadastrar a mensagem!', type: 'is-danger'})
         }

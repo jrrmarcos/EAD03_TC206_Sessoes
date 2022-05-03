@@ -47,9 +47,7 @@ export class LoginComponent implements OnInit {
       this.serviceUser.loginUser(this.user).subscribe(res => {
         if (res.status == 200) {
           sessionStorage.setItem('user', res.user)
-          sessionStorage.setItem('token', res.token)
-          console.log("Session storage token", `${localStorage.getItem('token')}`)
-          console.log("Token body: ", res.body.token)
+          sessionStorage.setItem('token', res.body.token)
           if (res.body.token != null) {
             toast({ message: 'Login realizado!', type: 'is-success' })
             this.router.navigate(['/messages'])

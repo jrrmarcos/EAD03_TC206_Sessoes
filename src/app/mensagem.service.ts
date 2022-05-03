@@ -13,7 +13,7 @@ export class MensagemService {
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${localStorage.getItem('token')}`})
+      'Authorization': `Bearer ${sessionStorage.getItem('token')}`})
   }
 
   baseUrl = "https://tiagoifsp.ddns.net/mensagens/jwt/msg.php"
