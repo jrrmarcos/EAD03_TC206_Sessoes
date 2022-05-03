@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Mensagem } from '../mensagem.model';
 import { MensagemService } from '../mensagem.service';
 import { User } from '../user.model';
+import { toast } from 'bulma-toast'
 
 @Component({
   selector: 'app-mensagem',
@@ -31,6 +32,7 @@ export class MensagemComponent implements OnInit {
 
   deslogar() {
     sessionStorage.removeItem('user');
+    toast({message: 'Até a próxima!', type: 'is-success'})
     this.router.navigate(['/login']);
   }
 
@@ -41,13 +43,14 @@ export class MensagemComponent implements OnInit {
       this.mensagemService.addMessage(this.mensagem).subscribe(res => {
         console.log(res)
         if (res.stauts === "OK") {
+          toast({message: 'Mensagem cadastrada!', type: 'is-success'})
           this.router.navigate(['/messages']);
         } else {
-          alert('Não foi possível efetuar o cadastro da mensagem')
+          toast({message: 'Não foi possível cadastrar a mensagem!', type: 'is-danger'})
         }
       })
     } else {
-      alert('Dados ausentes! - Preencha todos os campos')
+      toast({message: 'Dados ausentes, preencha todos os campos!', type: 'is-danger'})
     }
   }
 

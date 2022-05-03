@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from '../user.model';
 import { UserService } from '../user.service';
+import { toast } from 'bulma-toast'
 
 @Component({
   selector: 'app-login',
@@ -45,18 +46,24 @@ export class LoginComponent implements OnInit {
       console.log("this.user", this.user)
       this.serviceUser.loginUser(this.user).subscribe(res => {
         if (res.status == 200) {
-          console.log("Logado")
           sessionStorage.setItem('user', res.user)
           sessionStorage.setItem('token', res.token)
-          console.log(res.body.token)
-          this.router.navigate(['/messages'])
+          console.log("Session storage token", `${localStorage.getItem('token')}`)
+          console.log("Token body: ", res.body.token)
+          if (res.body.token != null) {
+            toast({ message: 'Login realizado!', type: 'is-success' })
+            this.router.navigate(['/messages'])
+          } else {
+            toast({ message: 'Login ou senha inválidos!', type: 'is-danger' })
+            this.router.navigate(['/login'])
+          }
         } else {
-          console.log("Não logado")
-          alert('Não foi possível efetuar o login!')
+          toast({ message: 'Não foi possível realizar o login!', type: 'is-danger' })
+          this.router.navigate(['/login'])
         }
       })
     } else {
-      alert('Dados ausentes, preencha todos os campos')
+      toast({ message: 'Dados ausentes, preencha todos os campos!', type: 'is-danger' })
     }
   }
 
@@ -70,17 +77,18 @@ export class LoginComponent implements OnInit {
           console.log("Cadastrado")
           sessionStorage.setItem('user', res.user)
           this.router.navigate(['/messages'])
+          toast({ message: 'Cadastro realizado!', type: 'is-success' })
         } else {
-          console.log("Não cadastrado")
-          alert('Não foi possível efetuar o cadastro!')
+          toast({ message: 'Erro ao cadastrar!', type: 'is-danger' })
         }
       })
     } else {
-      alert('Dados ausentes, preencha todos os campos!')
+      toast({ message: 'Dados ausentes, preencha todos os campos!', type: 'is-danger' })
     }
   }
 
   cancelar() {
+    toast({ message: 'Operação cancelada!', type: 'is-danger' })
     this.router.navigate(['/login'])
   }
 }

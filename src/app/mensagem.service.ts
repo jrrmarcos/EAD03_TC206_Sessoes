@@ -13,10 +13,8 @@ export class MensagemService {
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2NTE2MDQ1ODksImlzcyI6InRpYWdvaWZzcC5kZG5zLm5ldCIsIm5iZiI6MTY1MTYwNDU4OSwiZXhwIjoxNjUxNjA0NzA5LCJkYXRhIjp7ImlkIjoxMX19.KtSJ6dHL1EwMwCEiV-y1zJQYXWkAKMetjY-GQ7QpMwSBJ_zyC0xLEmkWiYiiLL7khjwJYcjzQIbW4_88yj0B7A`
-    })
+      'Authorization': `Bearer ${localStorage.getItem('token')}`})
   }
-  //${localStorage.getItem('token')}
 
   baseUrl = "https://tiagoifsp.ddns.net/mensagens/jwt/msg.php"
 

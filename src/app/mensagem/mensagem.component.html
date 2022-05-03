@@ -15,12 +15,11 @@
 </div>
 
 <div>
-    <h3>Mensagens previamente cadastradas</h3>
     <ul>
         <li *ngFor="let mensagem of mensagens">
             <article class="message is-info is-small">
                 <div class="message-header">
-                    <p>Data de criação: {{mensagem.date}}</p>
+                    <p>Mensagem postada em {{mensagem.date}}</p>
                 </div>
                 <div class="message-body">
                     {{mensagem.text}}
