@@ -13,7 +13,7 @@ export class MensagemService {
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2NTE1OTk3OTYsImlzcyI6InRpYWdvaWZzcC5kZG5zLm5ldCIsIm5iZiI6MTY1MTU5OTc5NiwiZXhwIjoxNjUxNTk5OTE2LCJkYXRhIjp7ImlkIjoxMX19.Zp6dMICI9y3MZ-QKHwPNsCqnUDuOvD-2nFDPvVyckPYNKPzoSpQ790AQNdUkRwcl4JBdOkgG1w-EYxYBNqCttg`
+      'Authorization': `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2NTE2MDQ1ODksImlzcyI6InRpYWdvaWZzcC5kZG5zLm5ldCIsIm5iZiI6MTY1MTYwNDU4OSwiZXhwIjoxNjUxNjA0NzA5LCJkYXRhIjp7ImlkIjoxMX19.KtSJ6dHL1EwMwCEiV-y1zJQYXWkAKMetjY-GQ7QpMwSBJ_zyC0xLEmkWiYiiLL7khjwJYcjzQIbW4_88yj0B7A`
     })
   }
   //${localStorage.getItem('token')}

@@ -1,35 +1,55 @@
-<h1>Mensagem Secreta</h1>
-<h3>Porque os segredos, devem ser só seus!</h3>
+<h1 class="title has-text-centered">Mensagem Secreta</h1>
+<h3 class="subtitle has-text-centered">Porque os segredos, devem ser só seus!</h3>
 
-<div class="field" *ngIf="showRegistro" >
-    <h2>Você ainda não está logado! <br> Efetue o login abaixo:</h2>
+<div class="field" *ngIf="showRegistro">
+    <h3 class="text has-text-centered">Você ainda não está logado :( <br><strong>Efetue o login abaixo:</strong></h3><br>
 
-    <form [formGroup]="loginForm">
-        <label class="label">Login</label>
-        <input class="input" placeholder="exemplo@email.com" type="text" formControlName="login">
+    <form class="form has-text-centered" [formGroup]="loginForm">
+        <label class="label has-text-centered">Login</label>
+        <input class="input has-text-centered" placeholder="exemplo@email.com" type="email" formControlName="login">
 
-        <label>Senha</label>
-        <input placeholder="Insira sua senha" type="password" formControlName="senha">
-    </form>
+        <label class="label has-text-centered">Senha</label>
+        <input class="input  has-text-centered" placeholder="Insira sua senha" type="password" formControlName="senha">
+    </form><br>
 
-    <button class="button" (click)="login()">Login</button>
-    <button (click)="openRegistro()">Cadastre-se</button>
+    <div class="field is-grouped is-grouped-centered">
+        <p class="control">
+            <a class="button is-primary" (click)="login()">
+                Login
+            </a>
+        </p>
+        <p class="control">
+            <a class="button is-light" (click)="openRegistro()">
+                Registre-se
+            </a>
+        </p>
+    </div>
 </div>
 
-<div *ngIf="!showRegistro">
-    <h2>Cadastre-se</h2>
+<div class="field" *ngIf="!showRegistro">
+    <form class="form has-text-centered" [formGroup]="registroForm">
+        <h2 class="subtitle"><strong>Registre-se</strong></h2>
 
-    <form [formGroup]="registroForm">
-        <label>Nome</label>
-        <input placeholder="José da Silva" type="text" formControlName="name">
+        <label class="label has-text-centered">Nome</label>
+        <input class="input has-text-centered" placeholder="José da Silva" type="text" formControlName="name">
 
-        <label>Login</label>
-        <input placeholder="exemplo@email.com" type="text" formControlName="login">
+        <label class="label has-text-centered">Login</label>
+        <input class="input has-text-centered" placeholder="exemplo@email.com" type="email" formControlName="login">
 
-        <label>Senha</label>
-        <input placeholder="Insira sua senha" type="password" formControlName="senha">
-    </form>
+        <label class="label has-text-centered">Senha</label>
+        <input class="input has-text-centered" placeholder="Insira sua senha" type="password" formControlName="senha">
+    </form><br>
 
-    <button (click)="registro()">Cadastre-se</button>
-    <button (click)="closeRegistro()">Cancelar</button>
+    <div class="field is-grouped is-grouped-centered">
+        <p class="control">
+            <a class="button is-primary" (click)="registro()">
+                Confirmar
+            </a>
+        </p>
+        <p class="control">
+            <a class="button is-light" (click)="closeRegistro()">
+                Cancelar
+            </a>
+        </p>
+    </div>
 </div>
