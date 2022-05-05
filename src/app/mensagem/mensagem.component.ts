@@ -11,7 +11,7 @@ import { toast } from 'bulma-toast'
   templateUrl: './mensagem.component.html',
   styleUrls: ['./mensagem.component.css']
 })
-export class MensagemComponent implements OnInit, OnDestroy {
+export class MensagemComponent implements OnInit {
 
   mensagens!: Mensagem[]
   user!: User
@@ -27,10 +27,6 @@ export class MensagemComponent implements OnInit, OnDestroy {
     this.carregar()
   }
 
-  ngOnDestroy(): void {
-    this.mensagens = null 
-  }
-
   carregar() {
     this.mensagemService.getAllMessages().subscribe(mensagens => {
       this.mensagens = mensagens
@@ -38,9 +34,8 @@ export class MensagemComponent implements OnInit, OnDestroy {
   }
 
   deslogar() {
-    //sessionStorage.setItem('user',null);
-    //sessionStorage.setItem('token',null);
-    sessionStorage.clear()
+    sessionStorage.setItem('user',null);
+    sessionStorage.setItem('token',null);
     console.log(this.mensagens)
     toast({ message: 'Até a próxima!', type: 'is-success' })
     this.router.navigate(['/login']);
@@ -52,6 +47,7 @@ export class MensagemComponent implements OnInit, OnDestroy {
         this.mensagemService.addMessage(this.formMensagem.get('mensagem').value).subscribe(res => {
           if (res.status === "OK") {
             toast({ message: 'Mensagem cadastrada!', type: 'is-success' })
+            this.formMensagem.get('mensagem').setValue(null)
             this.carregar()
           } else if ((res.status === "Erro") && (res.msg == "Bearer incorreto")) {
             toast({ message: 'Autenticação expirada! Identifique-se novamente', type: 'is-danger' })
