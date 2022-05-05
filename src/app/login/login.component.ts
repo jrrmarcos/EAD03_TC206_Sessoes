@@ -42,11 +42,13 @@ export class LoginComponent implements OnInit {
 
   login() {
     if (this.loginForm.valid) {
-      this.user = this.loginForm.value
+      let login = this.loginForm.get('login').value;
+      let senha = this.loginForm.get('senha').value;
+      this.user = {username: null, email: login, password: senha}
       console.log("this.user", this.user)
       this.serviceUser.loginUser(this.user).subscribe(res => {
         if (res.status == 200) {
-          sessionStorage.setItem('user', res.user)
+          sessionStorage.setItem('user', res.body.userName)
           sessionStorage.setItem('token', res.body.token)
           if (res.body.token != null) {
             toast({ message: 'Login realizado!', type: 'is-success' })
@@ -67,14 +69,18 @@ export class LoginComponent implements OnInit {
 
   registro() {
     if (this.registroForm.valid) {
-      this.user = this.registroForm.value
+      let nome = this.registroForm.get('name').value;
+      let login = this.registroForm.get('login').value;
+      let senha = this.registroForm.get('senha').value;
+      this.user = {username: nome, email: login, password: senha}
       console.log("this.user", this.user)
       this.serviceUser.addUser(this.user).subscribe(res => {
         console.log(res.status)
         if (res.status == "OK") {
           console.log("Cadastrado")
-          sessionStorage.setItem('user', res.user)
-          this.router.navigate(['/messages'])
+          sessionStorage.setItem('user', null)
+          sessionStorage.setItem('token', null)
+          this.router.navigate(['/login'])
           toast({ message: 'Cadastro realizado!', type: 'is-success' })
         } else {
           toast({ message: 'Erro ao cadastrar!', type: 'is-danger' })

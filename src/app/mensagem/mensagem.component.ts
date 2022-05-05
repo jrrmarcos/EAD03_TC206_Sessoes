@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Mensagem } from '../mensagem.model';
@@ -11,10 +11,9 @@ import { toast } from 'bulma-toast'
   templateUrl: './mensagem.component.html',
   styleUrls: ['./mensagem.component.css']
 })
-export class MensagemComponent implements OnInit {
+export class MensagemComponent implements OnInit, OnDestroy {
 
   mensagens!: Mensagem[]
-  mensagem!: Mensagem
   user!: User
 
   formMensagem = new FormGroup({
@@ -25,16 +24,24 @@ export class MensagemComponent implements OnInit {
     private mensagemService: MensagemService) { }
 
   ngOnInit(): void {
+    this.carregar()
+  }
+
+  ngOnDestroy(): void {
+    this.mensagens = null 
+  }
+
+  carregar() {
     this.mensagemService.getAllMessages().subscribe(mensagens => {
       this.mensagens = mensagens
     })
   }
 
-  carregar() {
-  }
-
   deslogar() {
-    sessionStorage.removeItem('user');
+    //sessionStorage.setItem('user',null);
+    //sessionStorage.setItem('token',null);
+    sessionStorage.clear()
+    console.log(this.mensagens)
     toast({ message: 'Até a próxima!', type: 'is-success' })
     this.router.navigate(['/login']);
   }
@@ -45,7 +52,7 @@ export class MensagemComponent implements OnInit {
         this.mensagemService.addMessage(this.formMensagem.get('mensagem').value).subscribe(res => {
           if (res.status === "OK") {
             toast({ message: 'Mensagem cadastrada!', type: 'is-success' })
-            location.reload()
+            this.carregar()
           } else if ((res.status === "Erro") && (res.msg == "Bearer incorreto")) {
             toast({ message: 'Autenticação expirada! Identifique-se novamente', type: 'is-danger' })
             this.router.navigate(['/login'])
