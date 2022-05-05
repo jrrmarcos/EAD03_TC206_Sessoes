@@ -18,9 +18,9 @@ export class MensagemService {
 
   baseUrl = "https://tiagoifsp.ddns.net/mensagens/jwt/msg.php"
 
-  addMessage(mensagem: Mensagem): Observable<any> {
+  addMessage(mensagem: string): Observable<any> {
     let body = new HttpParams();
-    body = body.set('mensagem', mensagem.text);
+    body = body.set('texto', mensagem);
     return this.http.put<Mensagem>(this.baseUrl, body, this.httpOptions)
   }
 

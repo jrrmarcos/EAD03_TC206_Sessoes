@@ -30,30 +30,32 @@ export class MensagemComponent implements OnInit {
     })
   }
 
+  carregar() {
+  }
+
   deslogar() {
     sessionStorage.removeItem('user');
-    toast({message: 'Até a próxima!', type: 'is-success'})
+    toast({ message: 'Até a próxima!', type: 'is-success' })
     this.router.navigate(['/login']);
   }
 
   addMensagem() {
     if (this.formMensagem.valid) {
-      this.mensagem = this.formMensagem.value;
-      console.log(this.mensagem)
-      this.mensagemService.addMessage(this.mensagem).subscribe(res => {
-        console.log(res)
-        if (res.stauts === "OK") {
-          toast({message: 'Mensagem cadastrada!', type: 'is-success'})
-          this.router.navigate(['/messages']);
-        } else if ((res.status === "Erro") && (res.msg == "Bearer incorreto")){
-          toast({message: 'Autenticação expirada! Identifique-se novamente', type: 'is-danger'})
-          this.router.navigate(['/login'])
-        } else {
-          toast({message: 'Não foi possível cadastrar a mensagem!', type: 'is-danger'})
-        }
-      })
-    } else {
-      toast({message: 'Dados ausentes, preencha todos os campos!', type: 'is-danger'})
+      if (this.formMensagem.get('mensagem')) {
+        this.mensagemService.addMessage(this.formMensagem.get('mensagem').value).subscribe(res => {
+          if (res.status === "OK") {
+            toast({ message: 'Mensagem cadastrada!', type: 'is-success' })
+            location.reload()
+          } else if ((res.status === "Erro") && (res.msg == "Bearer incorreto")) {
+            toast({ message: 'Autenticação expirada! Identifique-se novamente', type: 'is-danger' })
+            this.router.navigate(['/login'])
+          } else {
+            toast({ message: 'Não foi possível cadastrar a mensagem!', type: 'is-danger' })
+          }
+        })
+      } else {
+        toast({ message: 'Dados ausentes, preencha todos os campos!', type: 'is-danger' })
+      }
     }
   }
 
