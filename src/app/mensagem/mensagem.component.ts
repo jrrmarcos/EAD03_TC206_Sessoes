@@ -20,6 +20,7 @@ export class MensagemComponent implements OnInit {
     mensagem: new FormControl('', Validators.required)
   })
 
+
   constructor(private router: Router,
     private mensagemService: MensagemService) { }
 
@@ -34,8 +35,8 @@ export class MensagemComponent implements OnInit {
   }
 
   deslogar() {
-    sessionStorage.setItem('user',null);
-    sessionStorage.setItem('token',null);
+    sessionStorage.setItem('user', null);
+    sessionStorage.setItem('token', null);
     console.log(this.mensagens)
     toast({ message: 'Até a próxima!', type: 'is-success' })
     this.router.navigate(['/login']);
@@ -61,5 +62,4 @@ export class MensagemComponent implements OnInit {
       }
     }
   }
-
 }

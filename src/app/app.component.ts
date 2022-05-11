@@ -9,11 +9,10 @@ export class AppComponent {
   title = 'EAD03-Sessoes';
 
   isNotLogged() {
-    if (sessionStorage.getItem('user') != null) {
+    if ((sessionStorage.getItem('user') != null) && (sessionStorage.getItem('token') != null)) {
       return false
     } else {
       return true
     }
   }
-
 }
