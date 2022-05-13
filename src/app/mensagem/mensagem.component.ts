@@ -37,7 +37,6 @@ export class MensagemComponent implements OnInit {
   deslogar() {
     sessionStorage.setItem('user', null);
     sessionStorage.setItem('token', null);
-    console.log(this.mensagens)
     toast({ message: 'Até a próxima!', type: 'is-success' })
     this.router.navigate(['/login']);
   }
