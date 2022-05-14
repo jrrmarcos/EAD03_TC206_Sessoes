@@ -25,7 +25,18 @@ export class MensagemComponent implements OnInit {
     private mensagemService: MensagemService) { }
 
   ngOnInit(): void {
-    this.carregar()
+    let expiry = sessionStorage.getItem('expiry')
+    console.log('expiração do token: ', expiry)
+    if ((sessionStorage.getItem('token') != null) && (Number(expiry)>Date.now())) {
+      console.log('expiração token: ', expiry)
+      console.log('hora atual: ' , Date.now())
+      this.carregar()
+    } else {
+      sessionStorage.setItem('user',null)
+      sessionStorage.setItem('token',null)
+      toast({ message: 'Autenticação expirada! Identifique-se novamente', type: 'is-danger' })
+      this.router.navigate(['/login'])
+    }
   }
 
   carregar() {
@@ -37,6 +48,7 @@ export class MensagemComponent implements OnInit {
   deslogar() {
     sessionStorage.setItem('user', null);
     sessionStorage.setItem('token', null);
+    sessionStorage.setItem('expiry', null);
     toast({ message: 'Até a próxima!', type: 'is-success' })
     this.router.navigate(['/login']);
   }

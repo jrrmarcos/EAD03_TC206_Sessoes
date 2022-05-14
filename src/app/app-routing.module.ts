@@ -7,7 +7,8 @@ import { MensagemComponent } from './mensagem/mensagem.component';
 const routes: Routes = [
   {
     path: "login",
-    component: LoginComponent
+    component: LoginComponent,
+    //canActivate: [LoginGuard]
   },
   {
     path: "messages",

@@ -30,6 +30,10 @@ export class LoginComponent implements OnInit {
     private serviceUser: UserService) { }
 
   ngOnInit(): void {
+    let expiry = sessionStorage.getItem('expiry')
+    if ((sessionStorage.getItem('token') != null) && (Number(expiry)>Date.now())) {
+      this.router.navigate(['/messages'])
+    }
   }
 
   openRegistro() {
@@ -50,7 +54,8 @@ export class LoginComponent implements OnInit {
         if (res.status == 200) {
           sessionStorage.setItem('user', res.body.userName)
           sessionStorage.setItem('token', res.body.token)
-          if (res.body.token != null) {
+          sessionStorage.setItem('expiry', res.body.expiry)
+          if ((res.body.token != null) && (res.body.expiry > 0)) {
             toast({ message: 'Login realizado!', type: 'is-success' })
             this.router.navigate(['/messages'])
           } else {
