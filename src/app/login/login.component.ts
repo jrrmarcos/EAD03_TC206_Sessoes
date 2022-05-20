@@ -14,26 +14,34 @@ export class LoginComponent implements OnInit {
 
   user!: User
   showRegistro: boolean = true;
-
-  loginForm = new FormGroup({
-    login: new FormControl('', Validators.required),
-    senha: new FormControl('', Validators.required)
-  })
-
-  registroForm = new FormGroup({
-    name: new FormControl('', Validators.required),
-    login: new FormControl('', Validators.required),
-    senha: new FormControl('', Validators.required)
-  })
+  loginForm: FormGroup
+  registroForm: FormGroup
 
   constructor(private router: Router,
     private serviceUser: UserService) { }
 
   ngOnInit(): void {
+    this.initFormLogin()
+    this.initFormRegistro()
     let expiry = sessionStorage.getItem('expiry')
-    if ((sessionStorage.getItem('token') != null) && (Number(expiry)>Date.now())) {
+    if ((sessionStorage.getItem('token') != null) && (Number(expiry) > Date.now())) {
       this.router.navigate(['/messages'])
     }
+  }
+  
+  initFormLogin() {
+    this.loginForm = new FormGroup({
+      login: new FormControl('', Validators.required),
+      senha: new FormControl('', Validators.required)
+    })
+  }
+
+  initFormRegistro() {
+    this.registroForm = new FormGroup({
+      name: new FormControl('', Validators.required),
+      login: new FormControl('', Validators.required),
+      senha: new FormControl('', Validators.required)
+    })
   }
 
   openRegistro() {
@@ -56,7 +64,7 @@ export class LoginComponent implements OnInit {
           sessionStorage.setItem('token', res.body.token)
           sessionStorage.setItem('expiry', res.body.expiry)
           if ((res.body.token != null) && (res.body.expiry > 0)) {
-            toast({ message: 'Login realizado!', type: 'is-success' })
+            toast({ message: 'Seja bem vindo, '+`${res.body.userName}`+'!', type: 'is-success' })
             this.router.navigate(['/messages'])
           } else {
             toast({ message: 'Login ou senha inválidos!', type: 'is-danger' })
@@ -94,10 +102,5 @@ export class LoginComponent implements OnInit {
     } else {
       toast({ message: 'Dados ausentes, preencha todos os campos!', type: 'is-danger' })
     }
-  }
-
-  cancelar() {
-    toast({ message: 'Operação cancelada!', type: 'is-danger' })
-    this.router.navigate(['/login'])
   }
 }

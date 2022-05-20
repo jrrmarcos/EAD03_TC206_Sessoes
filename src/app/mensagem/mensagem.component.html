@@ -8,8 +8,7 @@
         <button class="button is-danger is-small" (click)="deslogar()">Desconectar</button>
 
         <h3 class="subtitle has-text-centered">Digite uma mensagem para cadastrar</h3>
-        <textarea class="textarea is-info is-small" placeholder="Digite o texto desejado" rows="6" cols="50"
-            formControlName="mensagem"></textarea>
+        <textarea class="textarea is-info is-small" formControlName="msg" placeholder="Digite o texto desejado" rows="6" cols="50"></textarea>
         <br><button class="button is-primary" (click)="addMensagem()">Cadastrar</button>
     </form>
 </div>
