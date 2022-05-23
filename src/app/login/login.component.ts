@@ -57,7 +57,6 @@ export class LoginComponent implements OnInit {
       let login = this.loginForm.get('login').value;
       let senha = this.loginForm.get('senha').value;
       this.user = { username: null, email: login, password: senha }
-      console.log("usuário logado:", this.user.email)
       this.serviceUser.loginUser(this.user).subscribe(res => {
         if (res.status == 200) {
           sessionStorage.setItem('user', res.body.userName)
@@ -86,11 +85,10 @@ export class LoginComponent implements OnInit {
       let login = this.registroForm.get('login').value;
       let senha = this.registroForm.get('senha').value;
       this.user = { username: nome, email: login, password: senha }
-      console.log("usuário cadastrado:", this.user.username, this.user.email)
+      console.log("usuário cadastrado!" + ", nome:", this.user.username, "login:", this.user.email)
       this.serviceUser.addUser(this.user).subscribe(res => {
         console.log(res.status)
         if ((res.status === "OK") || (res.status === 200)) {
-          console.log("Cadastrado com sucesso!")
           sessionStorage.setItem('user', null)
           sessionStorage.setItem('token', null)
           this.closeRegistro()

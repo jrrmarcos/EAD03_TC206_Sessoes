@@ -16,6 +16,7 @@ export class MensagemComponent implements OnInit {
   mensagens!: Mensagem[]
   user!: User
   formMensagem: FormGroup
+  mensagem: Mensagem
 
   constructor(private router: Router,
     private mensagemService: MensagemService) { }
@@ -58,20 +59,17 @@ export class MensagemComponent implements OnInit {
 
   addMensagem() {
     if (this.formMensagem.valid) {
-      if (this.formMensagem.get('mensagem')) {
-        this.mensagemService.addMessage(this.formMensagem.get('mensagem').value).subscribe(res => {
-          if (res.status === "OK") {
-            toast({ message: 'Mensagem cadastrada!', type: 'is-success' })
-            this.formMensagem.get('mensagem').setValue(null)
-            this.carregar()
-          } else if ((res.status === "Erro") && (res.msg == "Bearer incorreto")) {
-            toast({ message: 'Autenticação expirada! Identifique-se novamente', type: 'is-danger' })
-            this.router.navigate(['/login'])
-          } else {
-            toast({ message: 'Não foi possível cadastrar a mensagem!', type: 'is-danger' })
-          }
-        })
-      }
+      this.mensagemService.addMessage(this.formMensagem.get('msg').value).subscribe(res => {
+        if (res.status === "OK") {
+          toast({ message: 'Mensagem cadastrada!', type: 'is-success' })
+          this.carregar()
+        } else if ((res.status === "Erro") && (res.msg == "Bearer incorreto")) {
+          toast({ message: 'Autenticação expirada! Identifique-se novamente', type: 'is-danger' })
+          this.router.navigate(['/login'])
+        } else {
+          toast({ message: 'Não foi possível cadastrar a mensagem!', type: 'is-danger' })
+        }
+      })
     } else {
       toast({ message: 'O campo mensagem não pode estar vazio!', type: 'is-danger' })
     }
