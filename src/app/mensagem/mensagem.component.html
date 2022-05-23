@@ -8,13 +8,15 @@
         <button class="button is-danger is-small" (click)="deslogar()">Desconectar</button>
 
         <h3 class="subtitle has-text-centered">Digite uma mensagem para cadastrar</h3>
-        <textarea class="textarea is-info is-small" formControlName="msg" placeholder="Digite o texto desejado" rows="6" cols="50"></textarea>
-        <br><button class="button is-primary" (click)="addMensagem()">Cadastrar</button>
+        <textarea class="textarea is-info is-small" formControlName="msg" placeholder="Digite o texto desejado" rows="6"
+            cols="50"></textarea>
+        <br><button [ngClass]="['button', 'is-primary']" (click)="addMensagem()">Cadastrar</button>
     </form>
 </div>
 
 <div>
-    <h1><strong>Mensagens cadastradas</strong></h1>
+    <h1><strong>Mensagens cadastradas:</strong></h1>
+    
     <ul>
         <li *ngFor="let mensagem of mensagens">
             <article class="message is-info is-small">

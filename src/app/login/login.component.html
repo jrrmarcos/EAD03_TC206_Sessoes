@@ -1,8 +1,8 @@
-<h1 class="title has-text-centered">Mensagem Secreta</h1>
-<h3 class="subtitle has-text-centered">Porque os segredos, devem ser só seus!</h3>
+<h1 class='title' [ngClass]="estiloAlinhado"><strong>Mensagem Secreta</strong></h1>
+<h3 class='subtitle' [ngClass]="estiloAlinhado">Porque os segredos, devem ser só seus!</h3>
 
 <div class="field" *ngIf="showRegistro">
-    <h3 class="text has-text-centered">Você ainda não está logado :( <br><strong>Efetue o login abaixo:</strong></h3><br>
+    <h3 [ngClass]="estiloAlinhado">Você ainda não está logado :( <br><strong>Efetue o login abaixo:</strong></h3><br>
 
     <form class="form has-text-centered" [formGroup]="loginForm">
         <label class="label has-text-centered">Login</label>
@@ -28,7 +28,7 @@
 
 <div class="field" *ngIf="!showRegistro">
     <form class="form has-text-centered" [formGroup]="registroForm">
-        <h2 class="subtitle"><strong>Registre-se</strong></h2>
+        <h3 [ngClass]="estiloAlinhado"><strong>Registre-se</strong></h3><br>
 
         <label class="label has-text-centered">Nome</label>
         <input class="input has-text-centered" placeholder="José da Silva" type="text" formControlName="name">

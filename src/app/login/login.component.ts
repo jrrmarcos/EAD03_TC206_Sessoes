@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
   showRegistro: boolean = true;
   loginForm: FormGroup
   registroForm: FormGroup
+  estiloAlinhado: String = "has-text-centered"
 
   constructor(private router: Router,
     private serviceUser: UserService) { }
