@@ -16,7 +16,6 @@ export class LoginComponent implements OnInit {
   showRegistro: boolean = true;
   loginForm: FormGroup
   registroForm: FormGroup
-  estiloAlinhado: String = "has-text-centered"
 
   constructor(private router: Router,
     private serviceUser: UserService) { }
@@ -45,6 +44,26 @@ export class LoginComponent implements OnInit {
     })
   }
 
+  loginLoginIsValid() {
+    return this.loginForm.get('login').valid
+  }
+
+  senhaLoginIsValid() {
+    return this.loginForm.get('senha').valid
+  }
+
+  nomeRegisterIsValid() {
+    return this.registroForm.get('name').valid
+  }
+
+  loginRegisterIsValid() {
+    return this.registroForm.get('login').valid
+  }
+
+  senhaRegisterIsValid() {
+    return this.registroForm.get('senha').valid
+  }
+  
   openRegistro() {
     this.showRegistro = false;
   }
