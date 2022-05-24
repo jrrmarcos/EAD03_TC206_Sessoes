@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
   
   initFormLogin() {
     this.loginForm = new FormGroup({
-      login: new FormControl('', Validators.required),
+      login: new FormControl('', [Validators.required, Validators.email]),
       senha: new FormControl('', Validators.required)
     })
   }
@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
   initFormRegistro() {
     this.registroForm = new FormGroup({
       name: new FormControl('', Validators.required),
-      login: new FormControl('', Validators.required),
+      login: new FormControl('', [Validators.required, Validators.email]),
       senha: new FormControl('', Validators.required)
     })
   }
